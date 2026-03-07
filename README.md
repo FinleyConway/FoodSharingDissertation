@@ -4,7 +4,7 @@ A student food sharing webapp prototype for my dissertation project using C++ wi
 
 ## Building
 1. Install Git and CMake.
-2. Clone this repository: `git clone https://github.com/FinleyConway/FoodSharingDissertation.git`.
+2. Clone this repository: `git clone --recurse-submodules https://github.com/FinleyConway/FoodSharingDissertation.git`.
 3. Using CMake from the command line; making sure you are in the root directory of the project, use the following commands:
 ```bash
 cmake -B build
