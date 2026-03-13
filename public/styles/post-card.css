@@ -1,0 +1,79 @@
+/* The card wrapper */
+.post-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile row */
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #e8f0fe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a73e8;
+    flex-shrink: 0;
+}
+
+.post-username {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.post-time {
+    font-size: 12px;
+    color: #999;
+    margin: 0;
+}
+
+/* Image */
+.post-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+}
+
+/* Text content */
+.post-body {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.post-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.post-desc {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+    white-space: normal;
+    overflow: visible;
+    line-height: 1.5;
+}
+
+.post-tag {
+    font-size: 0.75rem;
+    background: #f0f0f0;
+    padding: 3px 10px;
+    border-radius: 999px;
+    width: fit-content;
+}

@@ -1,12 +1,38 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Test API</title>
-</head>
-<body>
-    <h1>API Test</h1>
-    <div id="output"></div>
+<html lang="en">
 
-    <script src="script.js"></script>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Listings</title>
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/layout.css" />
+    <link rel="stylesheet" href="styles/post-card.css" />
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- HEADER -->
+        <header class="top-bar">
+            <input type="text" class="search" placeholder="Search listings..." />
+            <button class="filter-btn">⚙</button>
+        </header>
+
+        <!-- FEED — cards injected here by JS -->
+        <main class="feed" id="feed"></main>
+
+        <!-- BOTTOM BAR -->
+        <footer class="bottom-bar">
+            <button class="add-btn">+</button>
+        </footer>
+
+    </div>
+
+    <!-- Scripts loaded at the bottom so the HTML exists before JS runs -->
+    <script src="components/post-card.js"></script>
+    <script src="scripts/main.js"></script>
+
 </body>
+
 </html>

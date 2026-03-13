@@ -42,21 +42,21 @@ std::optional<SQLite::Database> create_db() {
 
 int main() {
 
-    if (auto db = create_db()) {
-        SQLite::Statement query = {
-            *db,
-            "SELECT id, value FROM test"
-        };
+    // if (auto db = create_db()) {
+    //     SQLite::Statement query = {
+    //         *db,
+    //         "SELECT id, value FROM test"
+    //     };
 
-        while (query.executeStep()) {
-            int64_t id = query.getColumn(0).getInt64();
-            std::string_view value = query.getColumn(1).getText();
+    //     while (query.executeStep()) {
+    //         int64_t id = query.getColumn(0).getInt64();
+    //         std::string_view value = query.getColumn(1).getText();
 
-            std::println("[ID: {}, Value: {}]", id, value);
-        }
-    }
+    //         std::println("[ID: {}, Value: {}]", id, value);
+    //     }
+    // }
 
-    return 0;
+    // return 0;
     httplib::Server server;
 
     server.Get("/api", [](const httplib::Request&, httplib::Response& res) {
@@ -64,5 +64,5 @@ int main() {
     });
 
     server.set_mount_point("/", "./public");
-    server.listen("localhost", 8080);
+    server.listen("192.168.1.191", 8080);
 }
