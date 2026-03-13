@@ -1,0 +1,13 @@
+.add-btn {
+    position: absolute;
+    bottom: 40px;
+    right: 25px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #ff6b35;
+    color: white;
+    font-size: 28px;
+    border: none;
+    cursor: pointer;
+}

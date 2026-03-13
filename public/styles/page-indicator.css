@@ -1,0 +1,22 @@
+.page-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: 1.5px solid #ccc;
+    border-radius: 999px;
+    padding: 6px 12px;
+    background: white;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ccc;
+    transition: background 0.2s;
+}
+
+.dot--active {
+    background: #ff6b35;
+}

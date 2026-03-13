@@ -1,6 +1,7 @@
 import { createSearchPost } from "../components/search-post.js";
 import { createPostCard } from "../components/post-card.js";
 import { createAddButton } from "../components/add-button.js";
+import { createPageIndicator } from "../components/page-indicator.js";
 
 const listings = [
   {
@@ -38,5 +39,10 @@ const listings = [
 export function renderFoodListings() {
     document.getElementById("top-bar").innerHTML = createSearchPost()
     document.getElementById("app").innerHTML = listings.map(item => createPostCard(item)).join("");
-    document.getElementById("bottom-bar").innerHTML = createAddButton()
+    document.getElementById("bottom-bar").innerHTML = `
+      <div class="bottom-bar__inner">
+        ${createPageIndicator(4, 0)}
+        ${createAddButton()}
+      </div>
+    `;
 }
