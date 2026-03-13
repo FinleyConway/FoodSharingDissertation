@@ -14,7 +14,8 @@ export const Routes = {
 };
 
 export function navigateTo(page, data = {}) {
-  page(data);
+    document.getElementById("app").onclick = null; // prevent UB when switching pages
+    page(data);
 }
 
 export function setSwipeRoutesTo(onLeft, onRight) {
@@ -24,21 +25,20 @@ export function setSwipeRoutesTo(onLeft, onRight) {
 
 export function detectSwipe(element) {
     let startX = 0;
+    let startY = 0;
 
-    element.addEventListener('touchstart', (e) => {
+    element.addEventListener("touchstart", (e) => {
         startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
     });
 
-    element.addEventListener('touchend', (e) => {
-        const diff = startX - e.changedTouches[0].clientX;
+    element.addEventListener("touchend", (e) => {
+        const dx = startX - e.changedTouches[0].clientX;
+        const dy = startY - e.changedTouches[0].clientY;
 
-        if (Math.abs(diff) < 50) return; // ignore small movements
+        if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;
 
-        if (diff > 0 && onLeftHandler != null) {
-            onLeftHandler();   // swiped left  → next page
-        }
-        else if (diff < 0 && onRightHandler != null) {
-            onRightHandler();  // swiped right → prev page
-        }
+        if (dx > 0 && onLeftHandler) onLeftHandler();
+        else if (dx < 0 && onRightHandler) onRightHandler();
     });
 }

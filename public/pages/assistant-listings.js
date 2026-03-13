@@ -1,8 +1,9 @@
-import { createPostCard } from "../components/cards/post-card.js";
+import { createPostCard, onClickPostCard } from "../components/cards/post-card.js";
 import { createAddButton } from "../components/footer-bar/add-button.js";
 import { createPageIndicator } from "../components/footer-bar/page-indicator.js";
 import { navigateTo, Routes, setSwipeRoutesTo } from "../scripts/router.js";
 import { createHeaderBar } from "../components/header-bar/header-bar.js";
+import { setHtml } from "../scripts/dom.js";
 
 const listings = [
     {
@@ -38,17 +39,24 @@ const listings = [
 ];
 
 export function renderAssistantListings() {
-    document.getElementById("top-bar").innerHTML = createHeaderBar("Assistant Listings", true, true);
+    // create top bar
+    setHtml("top-bar", createHeaderBar("Assistant Listings", true, true));
 
-    document.getElementById("app").innerHTML = listings.map(item => createPostCard(item)).join("");
+    // create main 
+    setHtml("app", listings.map(item => createPostCard(item)).join(""));
+    onClickPostCard((id) => {
+        console.log(id);
+    });
 
-    document.getElementById("bottom-bar").innerHTML = `
+    // create bottom bar
+    setHtml("bottom-bar", `
         <div class="bottom-bar__inner">
             ${createPageIndicator(4, 1)}
             ${createAddButton()}
         </div>
-    `;
-
+    `);
+    
+    // allow to swipe to food listing and select inventory page
     setSwipeRoutesTo(
         () => navigateTo(Routes.SelectInventory), 
         () => navigateTo(Routes.FoodListing)
