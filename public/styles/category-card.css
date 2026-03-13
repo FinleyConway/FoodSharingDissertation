@@ -1,0 +1,25 @@
+.category-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.category-card__name {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+    color: #333;
+}
+
+.category-card__desc {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+    white-space: normal;
+}
