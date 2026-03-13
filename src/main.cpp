@@ -64,5 +64,5 @@ int main() {
     });
 
     server.set_mount_point("/", "./public");
-    server.listen("192.168.1.191", 8080);
+    server.listen("0.0.0.0", 8080);
 }
