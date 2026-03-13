@@ -1,4 +1,4 @@
-function createPostCard(listing) {
+export function createPostCard(listing) {
   return `
     <div class="post-card">
       <div class="post-header">
