@@ -2,8 +2,7 @@ import { createAddButton } from "../components/footer-bar/add-button.js";
 import { createCategoryCard } from "../components/cards/category-card.js";
 import { createHeaderBar } from "../components/header-bar/header-bar.js";
 import { createPageIndicator } from "../components/footer-bar/page-indicator.js";
-import { setSwipePages } from "../components/swipe-detection.js";
-import { navigate, routes } from "../scripts/router.js";
+import { navigateTo, Routes, setSwipeRoutesTo } from "../scripts/router.js";
 
 const mealPreperation = [
   { id: 1, name: "Very spicy chilli", desc: "Some diabolical meal" },
@@ -22,8 +21,8 @@ export function renderMealPreparing() {
         </div>
     `;
 
-    setSwipePages(
-        () => navigate(routes.FoodListing), 
-        () => navigate(routes.SelectInventory)
+    setSwipeRoutesTo(
+        () => navigateTo(Routes.FoodListing), 
+        () => navigateTo(Routes.SelectInventory)
     );
 }

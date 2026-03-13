@@ -2,8 +2,7 @@ import { createAddButton } from "../components/footer-bar/add-button.js";
 import { createCategoryCard } from "../components/cards/category-card.js";
 import { createHeaderBar } from "../components/header-bar/header-bar.js";
 import { createPageIndicator } from "../components/footer-bar/page-indicator.js";
-import { setSwipePages } from "../components/swipe-detection.js";
-import { navigate, routes } from "../scripts/router.js";
+import { navigateTo, Routes, setSwipeRoutesTo } from "../scripts/router.js";
 
 const inventories = [
   { id: 1, name: "My fridge", desc: "General food items at home" },
@@ -22,8 +21,8 @@ export function renderInventories() {
         </div>
     `;
 
-    setSwipePages(
-        () => navigate(routes.MealPreparing), 
-        () => navigate(routes.AssistantListing)
+    setSwipeRoutesTo(
+        () => navigateTo(Routes.MealPreparing), 
+        () => navigateTo(Routes.AssistantListing)
     );
 }

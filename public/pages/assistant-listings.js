@@ -1,8 +1,7 @@
 import { createPostCard } from "../components/cards/post-card.js";
 import { createAddButton } from "../components/footer-bar/add-button.js";
 import { createPageIndicator } from "../components/footer-bar/page-indicator.js";
-import { setSwipePages } from "../components/swipe-detection.js";
-import { navigate, routes } from "../scripts/router.js";
+import { navigateTo, Routes, setSwipeRoutesTo } from "../scripts/router.js";
 import { createHeaderBar } from "../components/header-bar/header-bar.js";
 
 const listings = [
@@ -50,8 +49,8 @@ export function renderAssistantListings() {
         </div>
     `;
 
-    setSwipePages(
-        () => navigate(routes.SelectInventory), 
-        () => navigate(routes.FoodListing)
+    setSwipeRoutesTo(
+        () => navigateTo(Routes.SelectInventory), 
+        () => navigateTo(Routes.FoodListing)
     );
 }

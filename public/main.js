@@ -1,8 +1,6 @@
-import { detectSwipe } from "./components/swipe-detection.js";
-import { navigate, routes } from "./scripts/router.js";
+import { detectSwipe, navigateTo, Routes } from "./scripts/router.js";
 
 // go to default page
-navigate(routes.FoodListing);
+navigateTo(Routes.FoodListing);
 
-// enable swiping
-detectSwipe(document.getElementById('app'));
+detectSwipe(document.getElementById("app"));

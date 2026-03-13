@@ -1,8 +1,7 @@
-import { createPostCard } from "../components/cards/post-card.js";
+import { createPostCard, onClickPostCard } from "../components/cards/post-card.js";
 import { createAddButton } from "../components/footer-bar/add-button.js";
 import { createPageIndicator } from "../components/footer-bar/page-indicator.js";
-import { setSwipePages } from "../components/swipe-detection.js";
-import { navigate, routes } from "../scripts/router.js";
+import { navigateTo, Routes, setSwipeRoutesTo } from "../scripts/router.js";
 import { createHeaderBar } from "../components/header-bar/header-bar.js";
 
 const listings = [
@@ -41,7 +40,12 @@ const listings = [
 export function renderFoodListings() {
     document.getElementById("top-bar").innerHTML = createHeaderBar("Food Listings", true, true);
 
-    document.getElementById("app").innerHTML = listings.map(item => createPostCard(item)).join("");
+    document.getElementById("app").innerHTML =
+        listings.map(item => createPostCard(item)).join("");
+
+    onClickPostCard((id) => {
+      navigateTo(Routes.SelectInventory);
+    });
 
     document.getElementById("bottom-bar").innerHTML = `
         <div class="bottom-bar__inner">
@@ -50,8 +54,8 @@ export function renderFoodListings() {
         </div>
     `;
 
-    setSwipePages(
-      () => navigate(routes.AssistantListing), 
-      () => navigate(routes.MealPreparing)
+    setSwipeRoutesTo(
+      () => navigateTo(Routes.AssistantListing), 
+      () => navigateTo(Routes.MealPreparing)
     );
 }
