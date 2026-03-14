@@ -1,21 +1,35 @@
-import { renderAssistantListings } from "../pages/assistant-listings.js";
-import { renderFoodListings } from "../pages/food-listings.js";
+import { renderAssistantListings } from "../pages/listings/assistant-listings.js";
+import { renderFoodListings } from "../pages/listings/food-listings.js";
 import { renderInventories } from "../pages/inventories.js";
 import { renderMealPreparing } from "../pages/meal-preparing.js";
+import { renderPostDetail } from "../pages/post-details.js"
 
 let onLeftHandler = null;
 let onRightHandler = null;
+let current_route = null;
+let previous_route = null;
 
 export const Routes = {
     FoodListing: renderFoodListings,
     AssistantListing: renderAssistantListings,
     SelectInventory: renderInventories,
     MealPreparing: renderMealPreparing,
+    PostDetails: renderPostDetail,
 };
 
 export function navigateTo(page, data = {}) {
     document.getElementById("app").onclick = null; // prevent UB when switching pages
     page(data);
+    previous_route = current_route;
+    current_route = page;
+}
+
+export function getCurrentRoute() {
+    return current_route;
+}
+
+export function getPreviousRoute() {
+    return previous_route;
 }
 
 export function setSwipeRoutesTo(onLeft, onRight) {
