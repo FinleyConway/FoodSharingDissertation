@@ -2,6 +2,7 @@ import { createCategoryCard, onClickCategoryCard } from "../../components/cards/
 import { createAddButton, onClickAddButton } from "../../components/footer-bar/add-button.js";
 import { createPageIndicator } from "../../components/footer-bar/page-indicator.js";
 import { createHeaderBar } from "../../components/header-bar/header-bar.js";
+import { showModal } from "../../components/model.js";
 import { setHtml } from "../../scripts/dom.js";
 import { navigateTo, Routes, setSwipeRoutesTo } from "../../scripts/router.js";
 
@@ -77,6 +78,18 @@ export function renderCollections() {
         </div>
     `);
 
-    onClickAddButton(() => navigateTo(Routes.CreateCollection));
+    onClickAddButton(() => {
+        showModal({
+            title: "New Collection",
+            fields: [
+                { key: "name", label: "Name", placeholder: "e.g. My Pantry" },
+                { key: "desc", label: "Description", placeholder: "e.g. General food items", multiline: true }
+            ],
+            onSubmit: (result) => {
+                console.log("new collection:", result);
+                // add to collections array and re-render
+            }
+        });
+    });
     setSwipeRoutesTo(Routes.FoodListing, Routes.AssistantListing);
 }
