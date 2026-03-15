@@ -3,6 +3,7 @@ import { renderFoodListings } from "../pages/listings/food-listings.js";
 import { renderInventories } from "../pages/inventories.js";
 import { renderMealPreparing } from "../pages/meal-preparing.js";
 import { renderPostDetail } from "../pages/post-details.js"
+import { renderCreatePostWizard } from "../pages/create-post-wizard.js";
 
 let onLeftHandler = null;
 let onRightHandler = null;
@@ -15,11 +16,15 @@ export const Routes = {
     SelectInventory: renderInventories,
     MealPreparing: renderMealPreparing,
     PostDetails: renderPostDetail,
+    CreatePostWizard: renderCreatePostWizard,
 };
 
 export function navigateTo(page, data = {}) {
+    document.getElementById("top-bar").onclick = null;
     document.getElementById("app").onclick = null; // prevent UB when switching pages
-    page(data);
+    document.getElementById("bottom-bar").onclick = null; // this feels very hacky ngl
+
+    page(data); 
     previous_route = current_route;
     current_route = page;
 }

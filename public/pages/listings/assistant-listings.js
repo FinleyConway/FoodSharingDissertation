@@ -22,6 +22,7 @@ export function renderAssistantListings() {
         pageIndex: 1,
         totalPages: 4,
         onCardClick: (id) => navigateTo(Routes.PostDetails, assistantListings.find(l => l.id == id)),
+        onAddButtonClick: () => navigateTo(Routes.CreatePostWizard),
         onSwipeLeft: () => navigateTo(Routes.SelectInventory),
         onSwipeRight: () => navigateTo(Routes.FoodListing)
     });

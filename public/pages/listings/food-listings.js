@@ -23,6 +23,7 @@ export function renderFoodListings() {
     pageIndex: 0,
     totalPages: 4,
     onCardClick: (id) => navigateTo(Routes.PostDetails, foodlistings.find(l => l.id == id)),
+    onAddButtonClick: () => navigateTo(Routes.CreatePostWizard),
     onSwipeLeft: () => navigateTo(Routes.AssistantListing),
     onSwipeRight: () => navigateTo(Routes.MealPreparing)
   });

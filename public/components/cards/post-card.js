@@ -1,6 +1,6 @@
 export function createPostCard(listing) {
     return `
-        <div class="post-card" data-id="${listing.id}">
+        <div class="post-card pressable" data-id="${listing.id}">
         <div class="post-header">
             <div class="avatar">${listing.initials}</div>
             <div>
