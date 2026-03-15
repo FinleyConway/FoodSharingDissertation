@@ -1,6 +1,6 @@
 # FoodSharing Dissertation
 
-A student food sharing webapp prototype for my dissertation project using C++ with HTML, CSS and JavaScript.
+A student food sharing web app prototype for my dissertation project using C++ with HTML, CSS and JavaScript.
 
 ## Building
 1. Install Git and CMake.
@@ -10,6 +10,20 @@ A student food sharing webapp prototype for my dissertation project using C++ wi
 cmake -B build
 cmake --build build
 ```
+
+## Running
+1. Navigate to `build/webapp` within the root directory of the project.
+2. Run `food-sharing-server` executable.
+3. Go to `http://localhost:8080` in your browser.
+
+> [!NOTE]
+> To access the web app from another device (e.g. mobile phone), use the **local IP address** of the device running the server.
+> 
+> For example, instead of:
+> `http://localhost:8080`
+> 
+> use:
+> `http://192.168.x.x:8080`
 
 ## External Libraries
 - [cpp-httplib](https://github.com/yhirose/cpp-httplib) is under the [MIT license](https://github.com/yhirose/cpp-httplib/blob/master/LICENSE).
