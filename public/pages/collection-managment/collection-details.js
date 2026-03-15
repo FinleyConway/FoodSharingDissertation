@@ -2,7 +2,7 @@ import { createCollectionItemCard, onClickCollectionItemCard } from "../../compo
 import { createAddButton, onClickAddButton } from "../../components/footer-bar/add-button.js";
 import { createHeaderBar, onClickBack } from "../../components/header-bar/header-bar.js";
 import { setHtml } from "../../scripts/dom.js";
-import { navigateBack, navigateTo, Routes, setSwipeRoutesTo } from "../../scripts/router.js";
+import { delayedNavigateTo, navigateBack, navigateTo, Routes, setSwipeRoutesTo } from "../../scripts/router.js";
 
 let collectionItems = [];
 
@@ -39,7 +39,7 @@ function renderContent(collection) {
             if (dec && item.quantity > 0) item.quantity--;
             renderContent(collection);
         },
-        (id) => navigateTo(Routes.PostDetails, collectionItems.find(i => i.id == id))
+        (id) => delayedNavigateTo(Routes.PostDetails, collectionItems.find(i => i.id == id))
     );
 }
 

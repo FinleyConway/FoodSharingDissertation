@@ -4,7 +4,7 @@ import { createPageIndicator } from "../../components/footer-bar/page-indicator.
 import { createHeaderBar } from "../../components/header-bar/header-bar.js";
 import { showModal } from "../../components/model.js";
 import { setHtml } from "../../scripts/dom.js";
-import { navigateTo, Routes, setSwipeRoutesTo } from "../../scripts/router.js";
+import { delayedNavigateTo, navigateTo, Routes, setSwipeRoutesTo } from "../../scripts/router.js";
 
 const collections = [
     {
@@ -68,7 +68,7 @@ export function renderCollections() {
 
     onClickCategoryCard((id) => {
         const collection = collections.find(c => c.id == id);
-        navigateTo(Routes.CollectionDetail, collection);
+        delayedNavigateTo(Routes.CollectionDetail, collection);
     });
 
     setHtml("bottom-bar", `
