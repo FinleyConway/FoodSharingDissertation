@@ -2,7 +2,7 @@ import { createAddButton } from "../components/footer-bar/add-button.js";
 import { createCategoryCard, onClickCategoryCard } from "../components/cards/category-card.js";
 import { createHeaderBar } from "../components/header-bar/header-bar.js";
 import { createPageIndicator } from "../components/footer-bar/page-indicator.js";
-import { navigateTo, delayedNavigateTo, Routes, setSwipeRoutesTo } from "../scripts/router.js";
+import { navigateTo, Routes, setSwipeRoutesTo } from "../scripts/router.js";
 import { setHtml } from "../scripts/dom.js";
 
 const inventories = [

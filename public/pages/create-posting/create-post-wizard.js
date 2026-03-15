@@ -1,11 +1,11 @@
 import { setHtml } from "../../scripts/dom.js";
 import { createHeaderBar, onClickBack } from "../../components/header-bar/header-bar.js";
-import { getPreviousRoute, navigateTo, Routes } from "../../scripts/router.js";
-import { createWizardCard, onClickWizardCard } from "../components/wizard-button.js";
+import { delayedNavigateTo, navigateBack, Routes } from "../../scripts/router.js";
+import { createWizardCard, onClickWizardCard } from "../../components/wizard/wizard-button.js";
 
 export function renderCreatePostWizard() {
     setHtml("top-bar", createHeaderBar("Create Post", false, false, true));
-    onClickBack(() => navigateTo(getPreviousRoute()));
+    onClickBack(() => navigateBack());
 
     setHtml("app", `
         <div class="wizard">
@@ -15,7 +15,7 @@ export function renderCreatePostWizard() {
     `);
     onClickWizardCard((action) => {
         //if (action === "barcode") navigateTo(Routes.BarcodeScanner);
-        //if (action === "manual") navigateTo(Routes.CreatePostManual);
+        if (action === "manual") delayedNavigateTo(Routes.CreatePostManual);
     });
 
     setHtml("bottom-bar", "");

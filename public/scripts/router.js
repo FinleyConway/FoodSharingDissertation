@@ -3,12 +3,13 @@ import { renderFoodListings } from "../pages/listings/food-listings.js";
 import { renderInventories } from "../pages/inventories.js";
 import { renderMealPreparing } from "../pages/meal-preparing.js";
 import { renderPostDetail } from "../pages/post-details.js"
-import { renderCreatePostWizard } from "../pages/create-post-wizard.js";
+import { renderCreatePostWizard } from "../pages/create-posting/create-post-wizard.js";
+import { renderCreatePostManual } from "../pages/create-posting/create-post-manual.js";
 
 let onLeftHandler = null;
 let onRightHandler = null;
-let current_route = null;
-let previous_route = null;
+let currentRoute = null;
+let routeStack = [];
 
 export const Routes = {
     FoodListing: renderFoodListings,
@@ -17,6 +18,7 @@ export const Routes = {
     MealPreparing: renderMealPreparing,
     PostDetails: renderPostDetail,
     CreatePostWizard: renderCreatePostWizard,
+    CreatePostManual: renderCreatePostManual,
 };
 
 export function navigateTo(page, data = {}) {
@@ -25,20 +27,47 @@ export function navigateTo(page, data = {}) {
     document.getElementById("bottom-bar").onclick = null; // this feels very hacky ngl
 
     page(data); 
-    previous_route = current_route;
-    current_route = page;
+
+    routeStack.push({ page, data });
+    currentRoute = page;
 }
 
 export function delayedNavigateTo(page, data = {}, delay = 150) {
     setTimeout(() => navigateTo(page, data), delay);
 }
 
-export function getCurrentRoute() {
-    return current_route;
+export function navigateBack() {
+    if (routeStack.length <= 1) return; // nothing to go back to
+
+    routeStack.pop(); // remove current page
+    const { page, data } = routeStack[routeStack.length - 1]; // peek at previous
+
+    document.getElementById("top-bar").onclick = null;
+    document.getElementById("app").onclick = null;
+    document.getElementById("bottom-bar").onclick = null;
+
+    page(data); // re-render previous page
+    currentRoute = page;
 }
 
-export function getPreviousRoute() {
-    return previous_route;
+export function navigateToTop() {
+    if (routeStack.length === 0) return;
+
+    const { page, data } = routeStack[0]; // get the first page
+
+    routeStack.length = 0; // clear the stack
+    routeStack.push({ page, data }); // push root back so stack isn't empty
+
+    document.getElementById("top-bar").onclick = null;
+    document.getElementById("app").onclick = null;
+    document.getElementById("bottom-bar").onclick = null;
+
+    page(data);
+    currentRoute = page;
+}
+
+export function delayedNavigateToTop(delay = 150) {
+    setTimeout(() => navigateToTop(), delay);
 }
 
 export function setSwipeRoutesTo(onLeft, onRight) {
