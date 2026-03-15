@@ -1,6 +1,6 @@
 import { setHtml } from "../../scripts/dom.js";
 import { createHeaderBar, onClickBack } from "../../components/header-bar/header-bar.js";
-import { delayedNavigateToTop, navigateBack } from "../../scripts/router.js";
+import { delayedNavigateToTop, navigateBack, setSwipeRoutesTo } from "../../scripts/router.js";
 import { createImagePicker, openImagePicker } from "../../components/wizard/image-picker.js";
 import { createItemQualityForm, createSubmitButton, onClickSubmitButton, showFormErrors, validateListing } from "../../components/wizard/item-quality-form.js";
 

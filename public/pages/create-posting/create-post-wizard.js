@@ -1,6 +1,6 @@
 import { setHtml } from "../../scripts/dom.js";
 import { createHeaderBar, onClickBack } from "../../components/header-bar/header-bar.js";
-import { delayedNavigateTo, navigateBack, Routes } from "../../scripts/router.js";
+import { delayedNavigateTo, navigateBack, Routes, setSwipeRoutesTo } from "../../scripts/router.js";
 import { createWizardCard, onClickWizardCard } from "../../components/wizard/wizard-button.js";
 
 export function renderCreatePostWizard() {
