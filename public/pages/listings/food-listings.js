@@ -21,10 +21,10 @@ export function renderFoodListings() {
         title: "Food Listings",
         listings: foodlistings,
         pageIndex: 0,
-        totalPages: 4,
+        totalPages: 3,
         onCardClick: (id) => delayedNavigateTo(Routes.PostDetails, foodlistings.find(l => l.id == id)),
         onAddButtonClick: () => delayedNavigateTo(Routes.CreatePostWizard),
         onSwipeLeft: () => navigateTo(Routes.AssistantListing),
-        onSwipeRight: () => navigateTo(Routes.MealPreparing)
+        onSwipeRight: () => navigateTo(Routes.SelectCollection)
     });
 }

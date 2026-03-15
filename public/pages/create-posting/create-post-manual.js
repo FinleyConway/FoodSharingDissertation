@@ -45,4 +45,5 @@ export function renderCreatePostManual(prefilled = {}) {
 
         delayedNavigateToTop();
     });
+    setSwipeRoutesTo(null, null);
 }

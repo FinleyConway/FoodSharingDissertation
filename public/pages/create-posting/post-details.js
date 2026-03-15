@@ -1,6 +1,6 @@
 import { setHtml } from "../../scripts/dom.js";
 import { createHeaderBar, onClickBack } from "../../components/header-bar/header-bar.js";
-import { navigateBack, setSwipeRoutesTo } from "../scripts/router.js";
+import { navigateBack, setSwipeRoutesTo } from "../../scripts/router.js";
 
 export function renderPostDetail(listing) {
     setHtml("top-bar", createHeaderBar(listing.name, false, false, true));

@@ -1,0 +1,10 @@
+.collection-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+}
+
+.collection-feed .form-label {
+    margin-top: 8px;
+}

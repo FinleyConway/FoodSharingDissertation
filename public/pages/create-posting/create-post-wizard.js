@@ -19,4 +19,5 @@ export function renderCreatePostWizard() {
     });
 
     setHtml("bottom-bar", "");
+    setSwipeRoutesTo(null, null);
 }

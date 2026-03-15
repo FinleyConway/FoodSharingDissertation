@@ -1,8 +1,10 @@
 import { renderAssistantListings } from "../pages/listings/assistant-listings.js";
 import { renderFoodListings } from "../pages/listings/food-listings.js";
-import { renderInventories } from "../pages/inventories.js";
-import { renderMealPreparing } from "../pages/meal-preparing.js";
-import { renderPostDetail } from "../pages/post-details.js"
+
+import { renderCollections } from "../pages/collection-managment/collections.js";
+import { renderCollectionDetail } from "../pages/collection-managment/collection-details.js";
+
+import { renderPostDetail } from "../pages/create-posting/post-details.js"
 import { renderCreatePostWizard } from "../pages/create-posting/create-post-wizard.js";
 import { renderCreatePostManual } from "../pages/create-posting/create-post-manual.js";
 
@@ -14,11 +16,11 @@ let routeStack = [];
 export const Routes = {
     FoodListing: renderFoodListings,
     AssistantListing: renderAssistantListings,
-    SelectInventory: renderInventories,
-    MealPreparing: renderMealPreparing,
     PostDetails: renderPostDetail,
     CreatePostWizard: renderCreatePostWizard,
     CreatePostManual: renderCreatePostManual,
+    SelectCollection: renderCollections,
+    CollectionDetail: renderCollectionDetail,
 };
 
 export function navigateTo(page, data = {}) {

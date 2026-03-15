@@ -20,10 +20,10 @@ export function renderAssistantListings() {
         title: "Assistant Listings",
         listings: assistantListings,
         pageIndex: 1,
-        totalPages: 4,
+        totalPages: 3,
         onCardClick: (id) => delayedNavigateTo(Routes.PostDetails, assistantListings.find(l => l.id == id)),
         onAddButtonClick: () => delayedNavigateTo(Routes.CreatePostWizard),
-        onSwipeLeft: () => navigateTo(Routes.SelectInventory),
+        onSwipeLeft: () => navigateTo(Routes.SelectCollection),
         onSwipeRight: () => navigateTo(Routes.FoodListing)
     });
 }
