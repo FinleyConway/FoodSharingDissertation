@@ -1,4 +1,4 @@
-import { navigateTo, Routes } from "../../scripts/router.js";
+import { navigateTo, delayedNavigateTo, Routes } from "../../scripts/router.js";
 import { renderListingsPage } from "./listing-page.js";
 
 const foodlistings = [
@@ -22,8 +22,8 @@ export function renderFoodListings() {
     listings: foodlistings,
     pageIndex: 0,
     totalPages: 4,
-    onCardClick: (id) => navigateTo(Routes.PostDetails, foodlistings.find(l => l.id == id)),
-    onAddButtonClick: () => navigateTo(Routes.CreatePostWizard),
+    onCardClick: (id) => delayedNavigateTo(Routes.PostDetails, foodlistings.find(l => l.id == id)),
+    onAddButtonClick: () => delayedNavigateTo(Routes.CreatePostWizard),
     onSwipeLeft: () => navigateTo(Routes.AssistantListing),
     onSwipeRight: () => navigateTo(Routes.MealPreparing)
   });

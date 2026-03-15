@@ -29,6 +29,10 @@ export function navigateTo(page, data = {}) {
     current_route = page;
 }
 
+export function delayedNavigateTo(page, data = {}, delay = 150) {
+    setTimeout(() => navigateTo(page, data), delay);
+}
+
 export function getCurrentRoute() {
     return current_route;
 }

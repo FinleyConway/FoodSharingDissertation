@@ -35,7 +35,7 @@ export function renderPostDetail(listing) {
 
     setHtml("bottom-bar", `
     <div class="bottom-bar__inner">
-      <button class="request-btn">
+      <button class="request-btn pressable">
         ${isWanted ? 'Offer Item' : 'Request Listing'}
       </button>
     </div>

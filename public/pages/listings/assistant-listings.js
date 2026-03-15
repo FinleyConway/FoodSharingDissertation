@@ -1,4 +1,4 @@
-import { navigateTo, Routes } from "../../scripts/router.js";
+import { navigateTo, delayedNavigateTo, Routes } from "../../scripts/router.js";
 import { renderListingsPage } from "./listing-page.js";
 
 const assistantListings = [
@@ -21,8 +21,8 @@ export function renderAssistantListings() {
         listings: assistantListings,
         pageIndex: 1,
         totalPages: 4,
-        onCardClick: (id) => navigateTo(Routes.PostDetails, assistantListings.find(l => l.id == id)),
-        onAddButtonClick: () => navigateTo(Routes.CreatePostWizard),
+        onCardClick: (id) => delayedNavigateTo(Routes.PostDetails, assistantListings.find(l => l.id == id)),
+        onAddButtonClick: () => delayedNavigateTo(Routes.CreatePostWizard),
         onSwipeLeft: () => navigateTo(Routes.SelectInventory),
         onSwipeRight: () => navigateTo(Routes.FoodListing)
     });
