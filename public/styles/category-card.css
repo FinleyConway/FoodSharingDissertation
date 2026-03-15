@@ -3,10 +3,18 @@
     border-radius: 12px;
     padding: 16px;
     display: flex;
-    flex-direction: column;
-    gap: 6px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
+}
+
+.category-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
 }
 
 .category-card__name {
@@ -17,9 +25,7 @@
 }
 
 .category-card__desc {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #666;
     margin: 0;
-    line-height: 1.5;
-    white-space: normal;
 }

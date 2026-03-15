@@ -8,7 +8,7 @@ import { navigateTo, Routes, setSwipeRoutesTo } from "../../scripts/router.js";
 const collections = [
     {
         id: 1,
-        type: "inventory",
+        type: "Inventory",
         name: "My Pantry",
         desc: "General food items at home",
         items: [
@@ -20,7 +20,7 @@ const collections = [
     },
     {
         id: 2,
-        type: "inventory",
+        type: "Inventory",
         name: "DnD Fridge",
         desc: "For da boyzz",
         items: [
@@ -31,7 +31,7 @@ const collections = [
     },
     {
         id: 3,
-        type: "mealprep",
+        type: "Meal",
         name: "Pasta Bolognese",
         desc: "A classic Italian meat sauce served over pasta.",
         howToMake: "Brown the mince in a pan, drain excess fat. Add diced onion and garlic and cook for 5 mins. Stir in tinned tomatoes and simmer for 20 mins. Cook pasta separately and combine.",
@@ -44,7 +44,7 @@ const collections = [
     },
     {
         id: 4,
-        type: "mealprep",
+        type: "Meal",
         name: "Veggie Stir Fry",
         desc: "A quick and healthy weeknight dinner packed with vegetables.",
         howToMake: "Heat oil in a wok on high heat. Add vegetables and stir fry for 5 mins. Add soy sauce and sesame oil, toss and serve over rice.",
@@ -57,21 +57,11 @@ const collections = [
 ];
 
 export function renderCollections() {
-    const inventories = collections.filter(c => c.type === "inventory");
-    const mealPreps   = collections.filter(c => c.type === "mealprep");
-
     setHtml("top-bar", createHeaderBar("Collections", true, false));
-    
+
     setHtml("app", `
         <div class="collection-feed">
-            ${inventories.length > 0 ? `
-                <p class="form-label">Inventories</p>
-                ${inventories.map(c => createCategoryCard(c)).join("")}
-            ` : ''}
-            ${mealPreps.length > 0 ? `
-                <p class="form-label">Meal Preps</p>
-                ${mealPreps.map(c => createCategoryCard(c)).join("")}
-            ` : ''}
+            ${collections.map(c => createCategoryCard(c)).join("")}
         </div>
     `);
 
@@ -88,6 +78,5 @@ export function renderCollections() {
     `);
 
     onClickAddButton(() => navigateTo(Routes.CreateCollection));
-
     setSwipeRoutesTo(Routes.FoodListing, Routes.AssistantListing);
 }

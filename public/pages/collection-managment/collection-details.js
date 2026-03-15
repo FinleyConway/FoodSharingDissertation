@@ -10,7 +10,7 @@ function renderContent(collection) {
     const outOfStock = collectionItems.filter(i => i.quantity === 0);
     const inStock = collectionItems.filter(i => i.quantity > 0);
 
-    const isMealPrep = collection.type === "mealprep";
+    const isMealPrep = collection.type === "Meal";
 
     setHtml("app", `
         <div class="collection-detail">
@@ -25,7 +25,7 @@ function renderContent(collection) {
             ` : ''}
 
             <div class="collection-detail__items">
-                ${isMealPrep ? `<p class="form-label">Ingredients</p>` : ''}
+                ${isMealPrep ? `<p class="form-label" style="font-weight: 600; color: #333;">Ingredients</p>` : ''}
                 ${createCollectionItemCard(inStock, outOfStock)}
             </div>
         </div>
