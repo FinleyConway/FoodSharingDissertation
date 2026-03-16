@@ -10,7 +10,6 @@ import { renderCreatePostManual } from "../pages/create-posting/create-post-manu
 
 let onLeftHandler = null;
 let onRightHandler = null;
-let currentRoute = null;
 let routeStack = [];
 
 export const Routes = {
@@ -31,7 +30,6 @@ export function navigateTo(page, data = {}) {
     page(data); 
 
     routeStack.push({ page, data });
-    currentRoute = page;
 }
 
 export function delayedNavigateTo(page, data = {}, delay = 150) {
@@ -49,7 +47,6 @@ export function navigateBack() {
     document.getElementById("bottom-bar").onclick = null;
 
     page(data); // re-render previous page
-    currentRoute = page;
 }
 
 export function navigateToTop() {
@@ -65,7 +62,6 @@ export function navigateToTop() {
     document.getElementById("bottom-bar").onclick = null;
 
     page(data);
-    currentRoute = page;
 }
 
 export function delayedNavigateToTop(delay = 150) {
@@ -92,7 +88,7 @@ export function detectSwipe(element) {
 
         if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;
 
-        if (dx > 0 && onLeftHandler) onLeftHandler();
-        else if (dx < 0 && onRightHandler) onRightHandler();
+        if (dx > 0 && onLeftHandler) navigateTo(onLeftHandler);
+        else if (dx < 0 && onRightHandler) navigateTo(onRightHandler);
     });
 }
