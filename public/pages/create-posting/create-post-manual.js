@@ -9,13 +9,13 @@ export function renderCreatePostManual(prefilled = {}) {
 
     setHtml("top-bar", createHeaderBar("Manual Create Post", false, false, true));
     onClickBack(() => navigateBack());
-
+    
     setHtml("app", `
         <div class="create-post-form">
-            ${createImagePicker()}
+            ${createImagePicker(prefilled.image_url ?? "")}
             <input class="form-input" type="text" placeholder="Food name" value="${prefilled.name ?? ''}" id="input-name" />
-            <textarea class="form-input form-textarea" placeholder="Description" id="input-desc">${prefilled.desc ?? ''}</textarea>
-            ${createItemQualityForm()}
+            <textarea class="form-input form-textarea" placeholder="Description" id="input-desc"></textarea>
+            ${createItemQualityForm(prefilled)}
         </div>
     `);
     openImagePicker((file) => {
@@ -28,7 +28,7 @@ export function renderCreatePostManual(prefilled = {}) {
         </div>
     `);
     onClickSubmitButton((results) => {
-        const errors = validateListing(results, selectedImage);
+        const errors = validateListing(results, selectedImage ?? prefilled.image_url);
 
         if (errors.length > 0) {
             showFormErrors(errors);
@@ -37,7 +37,7 @@ export function renderCreatePostManual(prefilled = {}) {
 
         const listing = {
             ...results,
-            image: selectedImage
+            image: selectedImage ?? prefilled.image_url
         };
 
         // give it to api in future
@@ -45,5 +45,6 @@ export function renderCreatePostManual(prefilled = {}) {
 
         delayedNavigateToTop();
     });
+    
     setSwipeRoutesTo(null, null);
 }

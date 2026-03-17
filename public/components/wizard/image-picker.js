@@ -1,11 +1,17 @@
-export function createImagePicker() {
+export function createImagePicker(preview_url = "") {
+    const hasImage = preview_url !== "";
+    
     return `
         <div class="form-image-picker pressable" data-action="pick-image">
-            <div class="form-image-picker__placeholder">
-                <span>📷</span>
-                <p>Tap to add image</p>
-            </div>
-            <img class="form-image-picker__preview" id="image-preview" src="" alt="" style="display:none;" />
+        <div class="form-image-picker__placeholder" style="${hasImage ? 'display:none;' : ''}">
+            <span>📷</span>
+            <p>Tap to add image</p>
+        </div>
+        <img class="form-image-picker__preview" id="image-preview" 
+            src="${preview_url}" 
+            alt="" 
+            style="${hasImage ? '' : 'display:none;'}" 
+        />
         </div>
     `;
 }

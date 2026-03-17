@@ -25,6 +25,7 @@ cmake --build build
 > use:
 > `http://192.168.x.x:8080`
 
-## External Libraries
+## External Libraries and APIs
 - [cpp-httplib](https://github.com/yhirose/cpp-httplib) is under the [MIT license](https://github.com/yhirose/cpp-httplib/blob/master/LICENSE).
 - [SQLiteCpp](https://github.com/SRombauts/SQLiteCpp) is under the [MIT license](https://github.com/SRombauts/SQLiteCpp/blob/master/LICENSE.txt).
+- [Open Food Facts API](https://world.openfoodfacts.org/api) is under the [Open Database License (ODbL)](https://world.openfoodfacts.org/terms-of-use).

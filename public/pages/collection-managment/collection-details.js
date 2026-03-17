@@ -16,11 +16,11 @@ function renderContent(collection) {
         <div class="collection-detail">
             ${isMealPrep ? `
                 <div class="collection-detail__info">
-                <p class="collection-detail__desc">${collection.desc}</p>
-                <div class="collection-detail__how-to">
-                    <p class="form-label">How to make</p>
-                    <p class="collection-detail__steps">${collection.howToMake}</p>
-                </div>
+                    <p class="collection-detail__desc">${collection.desc}</p>
+                    <div class="collection-detail__how-to">
+                        <p class="form-label">How to make</p>
+                        <p class="collection-detail__steps">${collection.howToMake}</p>
+                    </div>
                 </div>
             ` : ''}
 

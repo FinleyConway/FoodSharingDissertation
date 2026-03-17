@@ -3,11 +3,11 @@ export function createItemQualityForm(prefilled = {}) {
         <div class="form-section">
             <div class="form-field">
                 <label class="form-label">Expiry Date</label>
-                <input class="form-input" type="date" id="input-expiry" value="${prefilled.expiry ?? ''}" />
+                <input class="form-input" type="date" id="input-expiry" value="" />
             </div>
             <div class="form-field">
                 <label class="form-label">Ingredients</label>
-                <input class="form-input" type="text" placeholder="e.g. flour, eggs, milk" id="input-ingredients" value="${prefilled.ingredients ?? ''}" />
+                <textarea class="form-input form-textarea" placeholder="e.g. flour, eggs, milk" id="input-ingredients">${prefilled.ingredients ?? ''}</textarea>
             </div>
             <div class="form-field">
                 <label class="form-label">Quality Rating</label>

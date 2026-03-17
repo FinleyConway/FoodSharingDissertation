@@ -32,10 +32,11 @@
 
 .form-image-picker__preview {
     width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
+    max-height: 250px;
+    object-fit: contain;
     display: block;
     transition: all 0.3s ease;
+    background: #fafafa;
 }
 
 .form-input {

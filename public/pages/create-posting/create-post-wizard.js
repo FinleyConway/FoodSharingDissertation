@@ -2,6 +2,7 @@ import { setHtml } from "../../scripts/dom.js";
 import { createHeaderBar, onClickBack } from "../../components/header-bar/header-bar.js";
 import { delayedNavigateTo, navigateBack, Routes, setSwipeRoutesTo } from "../../scripts/router.js";
 import { createWizardCard, onClickWizardCard } from "../../components/wizard/wizard-button.js";
+import { showBarcodeModal } from "../../components/modals/barcode-modal.js";
 
 export function renderCreatePostWizard() {
     setHtml("top-bar", createHeaderBar("Create Post", false, false, true));
@@ -14,7 +15,9 @@ export function renderCreatePostWizard() {
         </div>
     `);
     onClickWizardCard((action) => {
-        //if (action === "barcode") navigateTo(Routes.BarcodeScanner);
+        if (action === "barcode") {
+            showBarcodeModal();
+        }
         if (action === "manual") delayedNavigateTo(Routes.CreatePostManual);
     });
 
