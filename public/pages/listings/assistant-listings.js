@@ -22,7 +22,7 @@ export function renderAssistantListings() {
         pageIndex: 1,
         totalPages: 3,
         onCardClick: (id) => delayedNavigateTo(Routes.PostDetails, assistantListings.find(l => l.id == id)),
-        onAddButtonClick: () => delayedNavigateTo(Routes.CreatePostWizard),
+        onAddButtonClick: () => delayedNavigateTo(Routes.CreatePostWizard, true),
         onSwipeLeft: () => navigateTo(Routes.SelectCollection),
         onSwipeRight: () => navigateTo(Routes.FoodListing)
     });

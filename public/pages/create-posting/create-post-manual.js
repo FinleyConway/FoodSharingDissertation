@@ -4,7 +4,7 @@ import { delayedNavigateToTop, navigateBack, setSwipeRoutesTo } from "../../scri
 import { createImagePicker, openImagePicker } from "../../components/wizard/image-picker.js";
 import { createItemQualityForm, createSubmitButton, onClickSubmitButton, showFormErrors, validateListing } from "../../components/wizard/item-quality-form.js";
 
-export function renderCreatePostManual(prefilled = {}) {    
+export function renderCreatePostManual(isWanted, prefilled = {}) {    
     let selectedImage = null;
 
     setHtml("top-bar", createHeaderBar("Manual Create Post", false, false, true));
@@ -15,7 +15,7 @@ export function renderCreatePostManual(prefilled = {}) {
             ${createImagePicker(prefilled.image_url ?? "")}
             <input class="form-input" type="text" placeholder="Food name" value="${prefilled.name ?? ''}" id="input-name" />
             <textarea class="form-input form-textarea" placeholder="Description" id="input-desc"></textarea>
-            ${createItemQualityForm(prefilled)}
+            ${!isWanted ? createItemQualityForm(prefilled) : ''}
         </div>
     `);
     openImagePicker((file) => {

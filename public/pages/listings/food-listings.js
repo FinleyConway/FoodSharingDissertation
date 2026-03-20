@@ -30,7 +30,7 @@ export function renderFoodListings() {
         pageIndex: 0,
         totalPages: 3,
         onCardClick: (id) => delayedNavigateTo(Routes.PostDetails, foodlistings.find(l => l.id == id)),
-        onAddButtonClick: () => delayedNavigateTo(Routes.CreatePostWizard),
+        onAddButtonClick: () => delayedNavigateTo(Routes.CreatePostWizard, false),
         onSwipeLeft: () => navigateTo(Routes.AssistantListing),
         onSwipeRight: () => navigateTo(Routes.SelectCollection)
     });
