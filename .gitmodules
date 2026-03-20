@@ -4,3 +4,6 @@
 [submodule "vendor/SQLiteCpp"]
 	path = vendor/SQLiteCpp
 	url = https://github.com/SRombauts/SQLiteCpp.git
+[submodule "vendor/json"]
+	path = vendor/json
+	url = https://github.com/nlohmann/json.git

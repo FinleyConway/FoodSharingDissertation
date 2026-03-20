@@ -13,11 +13,15 @@ add_executable(${PROJECT_NAME}
 
 # add submodules
 add_subdirectory(vendor/SQLiteCpp)
+add_subdirectory(vendor/json)
 target_include_directories(${PROJECT_NAME} PRIVATE
     vendor/cpp-httplib
 )
 
-target_link_libraries(${PROJECT_NAME} PRIVATE SQLiteCpp)
+target_link_libraries(${PROJECT_NAME} PRIVATE 
+    SQLiteCpp
+    nlohmann_json::nlohmann_json
+)
 
 # copy web files to binary
 add_custom_target(copy_public ALL

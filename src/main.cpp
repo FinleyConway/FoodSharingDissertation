@@ -4,6 +4,7 @@
 
 #include <httplib.h>
 #include <SQLiteCpp/SQLiteCpp.h>
+#include <nlohmann/json.hpp>
 
 // could macro like TRY_LOG(x) if exceptions get too much
 std::optional<SQLite::Database> create_db() {
