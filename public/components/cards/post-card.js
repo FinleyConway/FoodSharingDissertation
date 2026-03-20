@@ -2,7 +2,7 @@ export function createPostCard(listing) {
     return `
         <div class="post-card pressable" data-id="${listing.id}">
         <div class="post-header">
-            <div class="avatar">${listing.initials}</div>
+            <div class="avatar">${Array.from(listing.user)[0]}</div>
             <div>
             <p class="post-username">${listing.user}</p>
             <p class="post-time">${listing.time}</p>
