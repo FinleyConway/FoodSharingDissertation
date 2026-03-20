@@ -4,7 +4,7 @@ import { delayedNavigateToTop, navigateBack, setSwipeRoutesTo } from "../../scri
 import { createImagePicker, openImagePicker } from "../../components/wizard/image-picker.js";
 import { createItemQualityForm, createSubmitButton, onClickSubmitButton, showFormErrors, validateListing } from "../../components/wizard/item-quality-form.js";
 
-export function renderCreatePostManual(isWanted, prefilled = {}) {    
+export function renderCreatePostManual({ isWanted, prefilled = {} }) {    
     let selectedImage = null;
 
     setHtml("top-bar", createHeaderBar("Manual Create Post", false, false, true));

@@ -18,7 +18,7 @@ export function renderCreatePostWizard(isWanted = false) {
         if (action === "barcode") {
             showBarcodeModal();
         }
-        if (action === "manual") delayedNavigateTo(Routes.CreatePostManual, isWanted)
+        if (action === "manual") delayedNavigateTo(Routes.CreatePostManual, { isWanted: isWanted })
     });
 
     setHtml("bottom-bar", "");

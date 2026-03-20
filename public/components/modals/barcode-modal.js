@@ -17,7 +17,7 @@ export function showBarcodeModal() {
                 const product = await getBarcodeData(barcode);
 
                 if (product) {
-                    delayedNavigateTo(Routes.CreatePostManual, product);
+                    delayedNavigateTo(Routes.CreatePostManual, { isWanted: false, prefilled: product });
                 } 
                 else {
                     console.log("Product not found"); // Need to prompt user, though not worth for prototype?
