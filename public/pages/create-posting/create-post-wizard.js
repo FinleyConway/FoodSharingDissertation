@@ -4,7 +4,7 @@ import { delayedNavigateTo, navigateBack, Routes, setSwipeRoutesTo } from "../..
 import { createWizardCard, onClickWizardCard } from "../../components/wizard/wizard-button.js";
 import { showBarcodeModal } from "../../components/modals/barcode-modal.js";
 
-export function renderCreatePostWizard() {
+export function renderCreatePostWizard(isWanted = false) {
     setHtml("top-bar", createHeaderBar("Create Post", false, false, true));
     onClickBack(() => navigateBack());
 
@@ -18,7 +18,7 @@ export function renderCreatePostWizard() {
         if (action === "barcode") {
             showBarcodeModal();
         }
-        if (action === "manual") delayedNavigateTo(Routes.CreatePostManual);
+        if (action === "manual") delayedNavigateTo(Routes.CreatePostManual, { isWanted: isWanted })
     });
 
     setHtml("bottom-bar", "");

@@ -57,6 +57,6 @@ export function renderCollectionDetail(collection) {
         </div>
     `);
 
-    onClickAddButton(() => navigateTo(Routes.CreatePostWizard));
+    onClickAddButton(() => navigateTo(Routes.CreatePostWizard, false));
     setSwipeRoutesTo(null, null);
 }

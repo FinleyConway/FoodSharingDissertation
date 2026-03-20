@@ -4,12 +4,12 @@ import { renderListingsPage } from "./listing-page.js";
 const assistantListings = [
     {
         id: 1,
+        tag: "Wanted",
         name: "Sourdough Bread",
         desc: "Does anyone have a spare sourdough loaf? Forgot to grab one at the shops!",
         meetingInstructions: "Meet at the front door. Available between 5pm - 7pm.",
-        tag: "Wanted",
+        context: {},
         user: "James R",
-        initials: "JR",
         time: "1 hour ago",
         image: "https://picsum.photos/400/200?1"
     }
@@ -22,7 +22,7 @@ export function renderAssistantListings() {
         pageIndex: 1,
         totalPages: 3,
         onCardClick: (id) => delayedNavigateTo(Routes.PostDetails, assistantListings.find(l => l.id == id)),
-        onAddButtonClick: () => delayedNavigateTo(Routes.CreatePostWizard),
+        onAddButtonClick: () => delayedNavigateTo(Routes.CreatePostWizard, true),
         onSwipeLeft: () => navigateTo(Routes.SelectCollection),
         onSwipeRight: () => navigateTo(Routes.FoodListing)
     });
