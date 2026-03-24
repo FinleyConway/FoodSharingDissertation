@@ -1,6 +1,5 @@
 #include <print>
 #include <optional>
-#include <string_view>
 
 #include <httplib.h>
 #include <SQLiteCpp/SQLiteCpp.h>
@@ -10,27 +9,7 @@
 std::optional<SQLite::Database> create_db() {
     try {
         SQLite::Database db("db/test.db3", SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
-        SQLite::Transaction transaction(db);
-
-        db.exec(
-            "CREATE TABLE IF NOT EXISTS test ("
-            "   id INTEGER PRIMARY KEY AUTOINCREMENT," 
-            "   value TEXT NOT NULL"
-            ")"
-        );
-
-        SQLite::Statement query = {
-            db,
-            "INSERT INTO test (value) VALUES (?)"
-        };
-
-        for (uint8_t i = 0; i < 5; i++) {
-            query.bind(1, i);
-            query.exec();
-            query.reset();
-        }
-
-        transaction.commit();
+        db.exec("PRAGMA foreign_keys = ON;"); // enforces table relationships
 
         return db;
     }
