@@ -1,15 +1,10 @@
 #pragma once
 
 #include <cstdint>
-#include <string>
 
 #include <SQLiteCpp/SQLiteCpp.h>
 
-struct User
-{
-    std::string name;
-    std::string meeting_instructions;
-};
+#include "models/user.hpp"
 
 class UserRepo
 {

@@ -17,6 +17,7 @@ add_subdirectory(vendor/SQLiteCpp)
 add_subdirectory(vendor/json)
 target_include_directories(${PROJECT_NAME} PRIVATE
     vendor/cpp-httplib
+    ${PROJECT_SOURCE_DIR}/src/
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE 

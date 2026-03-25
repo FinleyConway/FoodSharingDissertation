@@ -1,17 +1,10 @@
 #pragma once
 
 #include <cstdint>
-#include <string>
 
 #include <SQLiteCpp/SQLiteCpp.h>
 
-struct Quality
-{
-    int64_t listing_id = 0;
-    int64_t expires = 0;
-    std::string ingredients;
-    std::string rating;
-};
+#include "models/quality.hpp"
 
 class QualityRepo
 {
@@ -31,13 +24,13 @@ public:
         )");
     }
 
-    void add_quality(const Quality& quality) {
+    void add_quality(int64_t listing_id, const Quality& quality) {
         SQLite::Statement query(m_db, R"(
             INSERT INTO quality (id, expires, ingredients, rating)
             VALUES(:id, :expires, :ingredients, :rating)
         )");
 
-        query.bind(":id", quality.listing_id);
+        query.bind(":id", listing_id);
         query.bind(":expires", quality.expires);
         query.bind(":ingredients", quality.ingredients);
         query.bind(":rating", quality.rating);
