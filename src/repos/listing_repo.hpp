@@ -47,7 +47,7 @@ public:
                 q.rating
             FROM listing AS l
             INNER JOIN user AS u ON u.id = l.user_id
-            INNER JOIN quality as q ON q.id = l.id
+            INNER JOIN quality AS q ON q.id = l.id
             LIMIT :limit OFFSET :offset 
         )");
         
