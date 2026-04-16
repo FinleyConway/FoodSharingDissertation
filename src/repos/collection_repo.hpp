@@ -2,6 +2,7 @@
 
 #include <SQLiteCpp/SQLiteCpp.h>
 
+#include "models/collection.hpp"
 #include "models/item.hpp"
 
 class CollectionRepo
@@ -23,6 +24,22 @@ public:
                 FOREIGN KEY(user_id) REFERENCES user(id) ON DELETE CASCADE
             );
         )");
+    }
+
+    int64_t add_collection(const Collection& collection) {
+        SQLite::Statement query(m_db, R"(
+            INSERT INTO collection (user_id, type, name, description, how_to_make)
+            VALUES(:user_id, :type, :name, :description, :how_to_make)
+        )");
+
+        query.bind(":user_id", collection.user_id);
+        query.bind(":type", collection.type);
+        query.bind(":name", collection.name);
+        query.bind(":description", collection.description);
+        query.bind(":how_to_make", collection.how_to_make);
+        query.exec();
+
+        return m_db.getLastInsertRowid();
     }
 
     template<typename Fn>
