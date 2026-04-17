@@ -70,9 +70,10 @@ public:
                 l.name AS listing_name, 
                 l.description, 
                 l.time, 
-                l.image_path,
+                l.image_path
             FROM listing AS l
             INNER JOIN user AS u ON u.id = l.user_id
+            WHERE l.tag = "Wanted"
             LIMIT :limit OFFSET :offset 
         )");
         

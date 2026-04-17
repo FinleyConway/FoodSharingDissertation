@@ -9,6 +9,7 @@
 #include "repos/user_repo.hpp"
 #include "repos/quality_repo.hpp"
 #include "repos/listing_repo.hpp"
+#include "routes/listing_routes.hpp"
 
 // could macro like TRY_LOG(x) if exceptions get too much
 std::optional<SQLite::Database> create_db() {
@@ -52,7 +53,7 @@ int main() {
         "Chickpea Curry",
         "Homemade spicy chickpea curry with rice",
         1710000000,
-        "/images/curry.jpg"
+        "https://picsum.photos/400/200?1"
     };
 
     Quality q1{
@@ -67,7 +68,7 @@ int main() {
         "Chicken Wrap",
         "Grilled chicken wrap with salad and sauce",
         1710003000,
-        "/images/wrap.jpg"
+        "https://picsum.photos/400/200?1"
     };
 
     Quality q2{
@@ -79,25 +80,45 @@ int main() {
     listing_repo.add_food_listing(l1, q1);
     listing_repo.add_food_listing(l2, q2);
 
+    Listing a1{
+        1,
+        "Wanted",
+        "Chickpea Curry",
+        "Homemade spicy chickpea curry with rice",
+        1710000000,
+        "https://picsum.photos/400/200?1"
+    };
+
+    Listing a2{
+        1,
+        "Wanted",
+        "Chicken Wrap",
+        "Grilled chicken wrap with salad and sauce",
+        1710003000,
+        "https://picsum.photos/400/200?1"
+    };
+
+    listing_repo.add_assistant_listing(a1);
+    listing_repo.add_assistant_listing(a2);
+
     httplib::Server server;
 
+    ListingRoutes listing_routes(listing_repo);
+
     server.Get("/api/food_listing/:limit/:offset", [&](const httplib::Request& req, httplib::Response& res) {
-        try {
-            auto listing_limit = std::stoul(req.path_params.at("limit"));
-            auto listing_offset = std::stoul(req.path_params.at("offset"));
+        listing_routes.get_all_food_listings(req, res);
+    });
 
-            nlohmann::json json;
+    server.Post("/api/food_listing/", [&](const httplib::Request& req, httplib::Response& res) {
+        listing_routes.create_food_listing(req, res);
+    });
 
-            listing_repo.get_all_food_listings(listing_limit, listing_offset, [&](FoodListing row) {
-                json.emplace_back(row.to_json());
-            });
+    server.Get("/api/assistant_listing/:limit/:offset", [&](const httplib::Request& req, httplib::Response& res) {
+        listing_routes.get_all_assistant_listings(req, res);
+    });
 
-            res.set_content(json.dump(), "application/json");
-        } 
-        catch (const std::exception& e) {
-            res.status = 400;
-            res.set_content(R"({"error": "Invalid limit or offset"})", "application/json");
-        }
+    server.Post("/api/assistant_listing/", [&](const httplib::Request& req, httplib::Response& res) {
+        listing_routes.create_assistant_listing(req, res);
     });
 
     server.set_mount_point("/", "./public");

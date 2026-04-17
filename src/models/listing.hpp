@@ -87,6 +87,7 @@ public:
 struct AssistantListing
 {
 public:
+    int64_t id = 0;
     std::string user_name;
     std::string user_meeting_instructions;
     std::string tag;
@@ -99,6 +100,7 @@ public:
     AssistantListing() = default;
 
     explicit AssistantListing(SQLite::Statement& query) {
+        id = query.getColumn("id").getInt64();
         user_name = query.getColumn("user_name").getString();
         user_meeting_instructions = query.getColumn("meeting_instructions").getString();
         tag = query.getColumn("tag").getString();
@@ -106,5 +108,19 @@ public:
         description = query.getColumn("description").getString();
         time = query.getColumn("time").getInt64();
         image_path = query.getColumn("image_path").getString();
+    }
+
+    nlohmann::json to_json() const {
+        return {
+            {"id", id},
+            {"user_name", user_name},
+            {"meeting_instructions", user_meeting_instructions},
+            {"tag", tag},
+            {"name", name},
+            {"description", description},
+            {"time", time},
+            {"image_path", image_path},
+            {"quality", {}}
+        };
     }
 };
