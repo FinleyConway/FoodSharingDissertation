@@ -1,21 +1,10 @@
+import { getListingData } from "../../scripts/query_listings.js";
 import { navigateTo, delayedNavigateTo, Routes } from "../../scripts/router.js";
 import { renderListingsPage } from "./listing-page.js";
 
-const assistantListings = [
-    {
-        id: 1,
-        tag: "Wanted",
-        name: "Sourdough Bread",
-        desc: "Does anyone have a spare sourdough loaf? Forgot to grab one at the shops!",
-        meetingInstructions: "Meet at the front door. Available between 5pm - 7pm.",
-        context: {},
-        user: "James R",
-        time: "1 hour ago",
-        image: "https://picsum.photos/400/200?1"
-    }
-];
+export async function renderAssistantListings() {
+    const assistantListings = await getListingData("assistant_listing", 10, 0);
 
-export function renderAssistantListings() {
     renderListingsPage({
         title: "Assistant Listings",
         listings: assistantListings,

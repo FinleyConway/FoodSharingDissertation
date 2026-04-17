@@ -33,9 +33,9 @@ public:
             );
 
             Quality quality(
-                body.at("expiry").get<int64_t>(),
-                body.at("ingredients").get<std::string>(),
-                body.at("rating").get<std::string>()
+                body["context"].at("expiry").get<int64_t>(),
+                body["context"].at("ingredients").get<std::string>(),
+                body["context"].at("rating").get<std::string>()
             );
 
             m_listing_repo.add_food_listing(listing, quality);
@@ -44,6 +44,7 @@ public:
             res.set_content(R"({"status":"created"})", "application/json");
         }
         catch (const std::exception& e) {
+            std::cout << e.what() << std::endl;
             res.status = 400;
             res.set_content(R"({"error":"invalid json"})", "application/json");
         }
