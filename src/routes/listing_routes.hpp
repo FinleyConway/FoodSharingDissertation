@@ -29,7 +29,7 @@ public:
                 body.at("name").get<std::string>(),
                 body.at("description").get<std::string>(),
                 publish_time,
-                body.at("image").get<std::string>()
+                body.at("image_path").get<std::string>()
             );
 
             Quality quality(
@@ -64,7 +64,7 @@ public:
                 body.at("name").get<std::string>(),
                 body.at("description").get<std::string>(),
                 publish_time,
-                body.at("image").get<std::string>()
+                body.at("image_path").get<std::string>()
             );
 
             m_listing_repo.add_assistant_listing(listing);

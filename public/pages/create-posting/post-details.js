@@ -10,7 +10,7 @@ export function renderPostDetail(listing) {
 
     setHtml("app", `
         <div class="post-detail">
-            <img class="post-detail__img" src="${listing.image}" alt="${listing.name}" />
+            <img class="post-detail__img" src="${listing.image_path}" alt="${listing.listing_name}" />
             <div class="post-detail__body">
 
                 <div class="post-detail__meta">
@@ -18,24 +18,24 @@ export function renderPostDetail(listing) {
                     <span class="post-tag">${listing.tag}</span>
                 </div>
 
-                <p class="post-detail__user">Posted by ${listing.user} · ${listing.time}</p>
+                <p class="post-detail__user">Posted by ${listing.user_name} · ${new Date(listing.time * 1000).toLocaleDateString("en-GB")}</p>
 
                 <div class="post-detail__section">
                     <h3 class="post-detail__section-title">Info</h3>
-                    <p class="post-detail__desc">${listing.desc}</p>
+                    <p class="post-detail__desc">${listing.description}</p>
                 </div>
 
                 <div class="post-detail__section">
                     <h3 class="post-detail__section-title">Meeting Instructions</h3>
-                    <p class="post-detail__meeting-text">${listing.meetingInstructions ?? 'No meeting instructions provided.'}</p>
+                    <p class="post-detail__meeting-text">${listing.meeting_instructions ?? 'No meeting instructions provided.'}</p>
                 </div>
 
                 ${!isWanted ? `
                 <div class="post-detail__section">
                     <h3 class="post-detail__section-title">Product Info</h3>
-                    <p class="post-detail__info-row"><span>Expires</span><span>${listing.context.expires}</span></p>
-                    <p class="post-detail__info-row"><span>Quality</span><span>${listing.context.quality}</span></p>
-                    <p class="post-detail__info-row"><span>Ingredients</span><span>${listing.context.ingredients.join(", ")}</span></p>
+                    <p class="post-detail__info-row"><span>Expires</span><span>${new Date(listing.quality.expires * 1000).toLocaleDateString("en-GB")}</span></p>
+                    <p class="post-detail__info-row"><span>Quality</span><span>${listing.quality.rating}</span></p>
+                    <p class="post-detail__info-row"><span>Ingredients</span><span>${listing.quality.ingredients}</span></p>
                 </div>
                 ` : ''}
 
