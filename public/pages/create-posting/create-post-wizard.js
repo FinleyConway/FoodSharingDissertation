@@ -16,7 +16,7 @@ export function renderCreatePostWizard(isWanted = false) {
     `);
     onClickWizardCard((action) => {
         if (action === "barcode") {
-            showBarcodeModal();
+            showBarcodeModal(isWanted);
         }
         if (action === "manual") delayedNavigateTo(Routes.CreatePostManual, { isWanted: isWanted })
     });

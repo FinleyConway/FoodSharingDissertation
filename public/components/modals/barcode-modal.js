@@ -2,7 +2,7 @@ import { getBarcodeData } from "../../scripts/barcode-item-handler.js";
 import { delayedNavigateTo, Routes } from "../../scripts/router.js";
 import { showModal } from "./modal.js";
 
-export function showBarcodeModal() {
+export function showBarcodeModal(isWanted) {
     return showModal({
         title: "Scan Barcode",
         content: `
@@ -17,7 +17,7 @@ export function showBarcodeModal() {
                 const product = await getBarcodeData(barcode);
 
                 if (product) {
-                    delayedNavigateTo(Routes.CreatePostManual, { isWanted: false, prefilled: product });
+                    delayedNavigateTo(Routes.CreatePostManual, { isWanted: isWanted, prefilled: product });
                 } 
                 else {
                     console.log("Product not found"); // Need to prompt user, though not worth for prototype?

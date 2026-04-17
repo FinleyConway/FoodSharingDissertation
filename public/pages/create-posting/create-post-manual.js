@@ -3,6 +3,8 @@ import { createHeaderBar, onClickBack } from "../../components/header-bar/header
 import { delayedNavigateToTop, navigateBack, setSwipeRoutesTo } from "../../scripts/router.js";
 import { createImagePicker, openImagePicker } from "../../components/wizard/image-picker.js";
 import { createItemQualityForm, createSubmitButton, onClickSubmitButton, showFormErrors, validateListing } from "../../components/wizard/item-quality-form.js";
+import { getUserId } from "../../scripts/current_user.js";
+import { createListing } from "../../scripts/create_listing.js";
 
 export function renderCreatePostManual({ isWanted, prefilled = {} }) {    
     let selectedImage = null;
@@ -27,8 +29,8 @@ export function renderCreatePostManual({ isWanted, prefilled = {} }) {
             ${createSubmitButton()}
         </div>
     `);
-    onClickSubmitButton((results) => {
-        const errors = validateListing(results, selectedImage ?? prefilled.image_url);
+    onClickSubmitButton(isWanted, (results) => {
+        const errors = validateListing(isWanted, results, selectedImage ?? prefilled.image_url);
 
         if (errors.length > 0) {
             showFormErrors(errors);
@@ -36,12 +38,17 @@ export function renderCreatePostManual({ isWanted, prefilled = {} }) {
         }
 
         const listing = {
+            user_id: getUserId(),
             ...results,
-            image: selectedImage ?? prefilled.image_url
+            image_path: selectedImage ?? prefilled.image_url
         };
 
         // give it to api in future
         console.log("Listings: ", listing);
+
+        if (!createListing(isWanted ? "assistant_listing" : "food_listing", listing)) {
+            return; // dont submit, server error
+        }
 
         delayedNavigateToTop();
     });

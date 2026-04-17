@@ -2,6 +2,13 @@ export function createItemQualityForm(prefilled = {}) {
     return `
         <div class="form-section">
             <div class="form-field">
+                <label class="form-label">Tag</label>
+                <select class="form-input" id="input-tag">
+                    <option value="Free">Free</option>
+                    <option value="Trade">Trade</option>
+                </select>
+            </div>
+            <div class="form-field">
                 <label class="form-label">Expiry Date</label>
                 <input class="form-input" type="date" id="input-expiry" value="" />
             </div>
@@ -27,23 +34,22 @@ export function createSubmitButton() {
     `;
 }
 
-export function validateListing(results, image) {
+export function validateListing(isWanted, results, image) {
     const errors = [];
 
     if (!image) errors.push("Please add an image.");
     if (!results.name.trim()) errors.push("Food name is required.");
-    if (!results.desc.trim()) errors.push("Description is required.");
-    if (!results.ingredients.trim()) errors.push("Ingredients are required.");
+    if (!isWanted && !results.tag.trim()) errors.push("Tag is required.");
+    if (!results.description.trim()) errors.push("Description is required.");
+    if (!isWanted && !results.context.ingredients.trim()) errors.push("Ingredients are required.");
 
-    if (!results.expiry) {
+    const now = Math.floor(Date.now() / 1000);
+
+    if (!isWanted && !results.context.expiry) {
         errors.push("Expiry date is required.");
     } 
-    else {
-        // prevent out of date product listings
-        const today = new Date();
-        today.setHours(0, 0, 0, 0); 
-        const expiry = new Date(results.expiry);
-        if (expiry < today) errors.push("Expiry date cannot be in the past.");
+    else if (!isWanted && results.context.expiry < now) {
+        errors.push("Expiry date cannot be in the past.");
     }
 
     return errors;
@@ -62,7 +68,7 @@ export function showFormErrors(errors) {
     bottomBar.insertBefore(el, bottomBar.firstChild);
 }
 
-export function onClickSubmitButton(onClick) {
+export function onClickSubmitButton(isWanted, onClick) {
     const bottom = document.getElementById("bottom-bar");
 
     bottom.onclick = (e) => {
@@ -70,12 +76,22 @@ export function onClickSubmitButton(onClick) {
         if (!btn) return;
 
         const results = {
+            tag: isWanted ? "Wanted" : document.getElementById("input-tag").value,
             name: document.getElementById("input-name").value,
-            desc: document.getElementById("input-desc").value,
-            expiry: document.getElementById("input-expiry").value,
-            ingredients: document.getElementById("input-ingredients").value,
-            quality: document.getElementById("input-quality").value,
+            description: document.getElementById("input-desc").value
         };
+
+        if (!isWanted) {
+            const expiryInput = document.getElementById("input-expiry").value;
+
+            results.context = {
+                expiry: expiryInput
+                    ? Math.floor(new Date(expiryInput).getTime() / 1000)
+                    : null,
+                ingredients: document.getElementById("input-ingredients").value,
+                rating: document.getElementById("input-quality").value
+            };
+        }
 
         onClick(results);
     };
