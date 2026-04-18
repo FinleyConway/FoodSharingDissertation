@@ -18,7 +18,7 @@ public:
     void create_food_listing(const httplib::Request& req, httplib::Response& res) {
         try {
             auto body = nlohmann::json::parse(req.body);
-            std::cout << body.dump() << std::endl;
+            
             int64_t publish_time = std::chrono::duration_cast<std::chrono::seconds>(
                 std::chrono::system_clock::now().time_since_epoch()
             ).count();

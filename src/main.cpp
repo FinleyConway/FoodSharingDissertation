@@ -6,6 +6,7 @@
 #include <nlohmann/json.hpp>
 
 #include "models/user.hpp"
+#include "repos/collection_repo.hpp"
 #include "repos/user_repo.hpp"
 #include "repos/quality_repo.hpp"
 #include "repos/listing_repo.hpp"
@@ -38,12 +39,16 @@ int main() {
     auto& database = database_opt.value();
 
     UserRepo user_repo(database);
+
     QualityRepo quality_repo(database);
     ListingRepo listing_repo(quality_repo, database);
+
+    CollectionRepo collection_repo(database);
 
     user_repo.create();
     quality_repo.create();
     listing_repo.create();
+    collection_repo.create();
 
     user_repo.add_user(User("Fin", "Meet at the front door. Available between 5pm - 7pm."));
 

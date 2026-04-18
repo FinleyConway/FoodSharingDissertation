@@ -3,7 +3,6 @@
 #include <SQLiteCpp/SQLiteCpp.h>
 
 #include "models/collection.hpp"
-#include "models/item.hpp"
 
 class CollectionRepo
 {
@@ -26,13 +25,13 @@ public:
         )");
     }
 
-    int64_t add_collection(const Collection& collection) {
+    int64_t add_collection(int64_t user_id, const Collection& collection) {
         SQLite::Statement query(m_db, R"(
             INSERT INTO collection (user_id, type, name, description, how_to_make)
             VALUES(:user_id, :type, :name, :description, :how_to_make)
         )");
 
-        query.bind(":user_id", collection.user_id);
+        query.bind(":user_id", user_id);
         query.bind(":type", collection.type);
         query.bind(":name", collection.name);
         query.bind(":description", collection.description);
@@ -43,9 +42,11 @@ public:
     }
 
     template<typename Fn>
-    void get_all_items_from(int64_t user_id, int64_t collection_id, Fn&& fn) {
+    void get_collection_with_items(int64_t user_id, Fn&& fn) {
+        // i hate this approach...
         SQLite::Statement query(m_db, R"(
             SELECT
+                c.id AS collection_id,
                 c.type,
                 c.name AS collection_name,
                 c.description AS collection_description,
@@ -55,16 +56,37 @@ public:
                 i.image_path,
                 i.quantity
             FROM collection AS c
-            INNER JOIN item AS i ON i.collection_id = c.id
+            LEFT JOIN item AS i ON i.collection_id = c.id
             WHERE c.user_id = :user_id
-            AND c.id = :collection_id
         )");
 
         query.bind(":user_id", user_id);
-        query.bind(":collection_id", collection_id);
+        
+        Collection collection;
+        Collection* collection_ptr = nullptr;
 
         while (query.executeStep()) {
-            std::forward<Fn>(fn)(Item(query));
+            int64_t collection_id = query.getColumn("collection_id").getInt64();
+
+            // bit wacky here...
+            // checks if it has found a new collection
+            if (collection_ptr == nullptr || collection.id != collection_id) {
+                // push the previous one as its done
+                if (collection_ptr != nullptr) {
+                    std::forward<Fn>(fn)(collection);
+                }
+
+                // create a new collection
+                collection = Collection(query);
+                collection_ptr = &collection;
+            }
+
+            // add item to current collection
+            collection.items.emplace_back(query);
+        }
+
+        if (collection_ptr != nullptr) {
+            std::forward<Fn>(fn)(collection);
         }
     }
 
