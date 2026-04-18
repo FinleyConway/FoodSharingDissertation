@@ -4,6 +4,8 @@
 
 #include <httplib.h>
 
+#include "models/assistant_listing.hpp"
+#include "models/food_listing.hpp"
 #include "models/listing.hpp"
 #include "models/quality.hpp"
 #include "repos/listing_repo.hpp"
@@ -87,7 +89,7 @@ public:
             nlohmann::json json = nlohmann::json::array();
 
             m_listing_repo.get_all_food_listings(listing_limit, listing_offset, [&](FoodListing row) {
-                json.emplace_back(row.to_json());
+                json.emplace_back(row);
             });
 
             res.set_content(json.dump(), "application/json");
@@ -106,7 +108,7 @@ public:
             nlohmann::json json = nlohmann::json::array();
 
             m_listing_repo.get_all_assistant_listings(listing_limit, listing_offset, [&](AssistantListing row) {
-                json.emplace_back(row.to_json());
+                json.emplace_back(row);
             });
 
             res.set_content(json.dump(), "application/json");

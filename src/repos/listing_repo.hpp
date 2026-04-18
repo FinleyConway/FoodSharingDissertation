@@ -4,6 +4,8 @@
 
 #include <SQLiteCpp/SQLiteCpp.h>
 
+#include "models/assistant_listing.hpp"
+#include "models/food_listing.hpp"
 #include "models/listing.hpp"
 #include "repos/quality_repo.hpp"
 
