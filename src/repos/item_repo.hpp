@@ -9,9 +9,7 @@
 class ItemRepo
 {
 public:
-    explicit ItemRepo(SQLite::Database& db) : m_db(db) { }
-
-    void create() {
+    explicit ItemRepo(SQLite::Database& db) : m_db(db) {
         m_db.exec(R"(
             CREATE TABLE item (
                 id INTEGER PRIMARY KEY,

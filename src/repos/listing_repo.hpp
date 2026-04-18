@@ -10,11 +10,7 @@
 class ListingRepo
 {
 public:
-    explicit ListingRepo(QualityRepo& quality_repo, SQLite::Database& db) : 
-        m_db(db), m_quality_repo(quality_repo) { 
-    }
-
-    void create() {
+    explicit ListingRepo(QualityRepo& quality_repo, SQLite::Database& db) : m_db(db), m_quality_repo(quality_repo) { 
         m_db.exec(R"(
             CREATE TABLE listing (
                 id INTEGER PRIMARY KEY,

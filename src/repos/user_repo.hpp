@@ -9,9 +9,7 @@
 class UserRepo
 {
 public:
-    explicit UserRepo(SQLite::Database& db) : m_db(db) { }
-
-    void create() {
+    explicit UserRepo(SQLite::Database& db) : m_db(db) {
         m_db.exec(R"(
             CREATE TABLE user (
                 id INTEGER PRIMARY KEY,
@@ -19,7 +17,7 @@ public:
                 meeting_instructions TEXT NOT NULL
             );
         )");
-    } 
+    }
 
     int64_t add_user(const User& user) {
         SQLite::Statement query(m_db, R"(

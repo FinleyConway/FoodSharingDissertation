@@ -8,9 +8,6 @@ class CollectionRepo
 {
 public:
     explicit CollectionRepo(SQLite::Database& db) : m_db(db) { 
-    }
-
-    void create() {
         m_db.exec(R"(
             CREATE TABLE collection (
                 id INTEGER PRIMARY KEY,

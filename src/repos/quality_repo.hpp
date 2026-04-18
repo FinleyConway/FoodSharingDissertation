@@ -9,9 +9,7 @@
 class QualityRepo
 {
 public:
-    explicit QualityRepo(SQLite::Database& db) : m_db(db) { }
-
-    void create() {
+    explicit QualityRepo(SQLite::Database& db) : m_db(db) {
         m_db.exec(R"(
             CREATE TABLE quality (
                 id INTEGER PRIMARY KEY,
