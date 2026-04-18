@@ -22,6 +22,13 @@ public:
 public:
     Collection() = default;
 
+    Collection(const std::string& type, const std::string& name, const std::string& description, const std::string& how_to_make)
+        : type(type),
+          name(name),
+          description(description),
+          how_to_make(how_to_make)
+    {}
+
     explicit Collection(SQLite::Statement& query) {
         id = query.getColumn("collection_id").getInt64();
         type = query.getColumn("type").getString();

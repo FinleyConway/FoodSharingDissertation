@@ -10,6 +10,7 @@
 #include "repos/user_repo.hpp"
 #include "repos/quality_repo.hpp"
 #include "repos/listing_repo.hpp"
+#include "routes/collection_routes.hpp"
 #include "routes/listing_routes.hpp"
 
 // could macro like TRY_LOG(x) if exceptions get too much
@@ -102,6 +103,7 @@ int main() {
     httplib::Server server;
 
     ListingRoutes listing_routes(listing_repo);
+    CollectionRoutes collection_routes(collection_repo);
 
     server.Get("/api/food_listing/:limit/:offset", [&](const httplib::Request& req, httplib::Response& res) {
         listing_routes.get_all_food_listings(req, res);
@@ -117,6 +119,14 @@ int main() {
 
     server.Post("/api/assistant_listing/", [&](const httplib::Request& req, httplib::Response& res) {
         listing_routes.create_assistant_listing(req, res);
+    });
+
+    server.Get("/api/collection/:user_id", [&](const httplib::Request& req, httplib::Response& res) {
+        collection_routes.get_collections(req, res);
+    });
+
+    server.Post("/api/collection/", [&](const httplib::Request& req, httplib::Response& res) {
+        collection_routes.create_collection(req, res);
     });
 
     server.set_mount_point("/", "./public");
