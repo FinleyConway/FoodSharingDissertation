@@ -7,6 +7,7 @@ import { renderCollectionDetail } from "../pages/collection-managment/collection
 import { renderPostDetail } from "../pages/create-posting/post-details.js"
 import { renderCreatePostWizard } from "../pages/create-posting/create-post-wizard.js";
 import { renderCreatePostManual } from "../pages/create-posting/create-post-manual.js";
+import { renderCreateItemManual } from "../pages/collection-managment/create-manual-item.js";
 
 let onLeftHandler = null;
 let onRightHandler = null;
@@ -20,6 +21,7 @@ export const Routes = {
     CreatePostManual: renderCreatePostManual,
     SelectCollection: renderCollections,
     CollectionDetail: renderCollectionDetail,
+    CreateItemManual: renderCreateItemManual
 };
 
 export function navigateTo(page, data = {}) {
