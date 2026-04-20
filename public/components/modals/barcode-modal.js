@@ -13,18 +13,25 @@ export function showBarcodeModal(isWanted) {
         `,
         onSubmit: async () => {
             const barcode = document.getElementById("modal-barcode").value;
+
             try {
                 const product = await getBarcodeData(barcode);
 
                 if (product) {
                     delayedNavigateTo(Routes.CreatePostManual, { isWanted: isWanted, prefilled: product });
+
+                    return true;
                 } 
                 else {
                     console.log("Product not found"); // Need to prompt user, though not worth for prototype?
+                    
+                    return false;
                 }
             }
             catch(error) {
                 console.log(`Failled to query api: ${error}`); // Need to prompt user, though not worth for prototype?
+
+                return false;
             }
         }
     });

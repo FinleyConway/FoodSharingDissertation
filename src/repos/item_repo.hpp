@@ -27,10 +27,10 @@ public:
     void add_item(int64_t collection_id, const Item& item) {
         SQLite::Statement query(m_db, R"(
             INSERT INTO item (collection_id, name, description, image_path, quantity)
-            VALUES(:id, :name, :description, :image_path, :quantity)
+            VALUES(:collection_id, :name, :description, :image_path, :quantity)
         )");
 
-        query.bind("collection_id", collection_id);
+        query.bind(":collection_id", collection_id);
         query.bind(":name", item.name);
         query.bind(":description", item.description);
         query.bind(":image_path", item.image_path);

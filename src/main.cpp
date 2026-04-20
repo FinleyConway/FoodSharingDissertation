@@ -109,12 +109,15 @@ int main() {
 
     add_listing_examples(listing_repo);
 
-    collection_repo.add_collection(1, Collection("Inventory", "Fridge", "My home fridge", ""));
-    collection_repo.add_collection(1, Collection("Meal", 
+    auto c1 = collection_repo.add_collection(1, Collection("Inventory", "Fridge", "My home fridge", ""));
+    item_repo.add_item(c1, Item("Pasta", "Fusilli 500g", "https://picsum.photos/400/200?1", 3));
+
+    auto c2 = collection_repo.add_collection(1, Collection("Meal", 
         "Pasta Bolognese", 
         "A classic Italian meat sauce served over pasta.", 
         "Brown the mince in a pan, drain excess fat. Add diced onion and garlic and cook for 5 mins. Stir in tinned tomatoes and simmer for 20 mins. Cook pasta separately and combine."
     ));
+    item_repo.add_item(c2, Item("Pasta", "Fusilli 500g", "https://picsum.photos/400/200?1", 3));
 
     httplib::Server server;
 

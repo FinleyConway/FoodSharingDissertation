@@ -32,7 +32,9 @@ export async function renderCollections() {
     `);
 
     onClickAddButton(() => {
-        showCollectionModal();
+        showCollectionModal(() => {
+            renderCollections();
+        });
     });
     setSwipeRoutesTo(Routes.FoodListing, Routes.AssistantListing);
 }

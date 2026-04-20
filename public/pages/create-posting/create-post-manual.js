@@ -43,9 +43,6 @@ export function renderCreatePostManual({ isWanted, prefilled = {} }) {
             image_path: selectedImage ?? prefilled.image_url
         };
 
-        // give it to api in future
-        console.log("Listings: ", listing);
-
         if (!createListing(isWanted ? "assistant_listing" : "food_listing", listing)) {
             return; // dont submit, server error
         }

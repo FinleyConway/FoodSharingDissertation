@@ -25,8 +25,9 @@ export function showModal({ title, content, onSubmit }) {
         if (e.target === overlay) closeModal();
         if (e.target.closest('[data-action="cancel"]')) closeModal();
         if (e.target.closest('[data-action="submit"]')) {
-            onSubmit();
-            closeModal();
+            if (onSubmit()) {
+                closeModal();
+            }          
         }
     };
 }

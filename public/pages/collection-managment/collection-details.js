@@ -39,7 +39,7 @@ function renderContent(collection) {
             if (dec && item.quantity > 0) item.quantity--;
             renderContent(collection);
         },
-        (id) => delayedNavigateTo(Routes.PostDetails, collectionItems.find(i => i.id == id))
+        (id) => delayedNavigateTo(Routes.FoodListing)
     );
 }
 
