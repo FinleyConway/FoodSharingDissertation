@@ -1,12 +1,13 @@
-#include <print>
 #include <optional>
 
 #include <httplib.h>
 #include <SQLiteCpp/SQLiteCpp.h>
 #include <nlohmann/json.hpp>
 
+#include "models/collection.hpp"
 #include "models/user.hpp"
 #include "repos/collection_repo.hpp"
+#include "repos/item_repo.hpp"
 #include "repos/user_repo.hpp"
 #include "repos/quality_repo.hpp"
 #include "repos/listing_repo.hpp"
@@ -22,30 +23,13 @@ std::optional<SQLite::Database> create_db() {
         return db;
     }
     catch (const std::exception& e) {
-        std::println("exception: {}", e.what());
+        std::cout << e.what() << std::endl;
 
         return std::nullopt;
     }
 }
 
-int main() {
-    auto database_opt = create_db();
-
-    if (!database_opt.has_value()) {
-        std::println("Database could not be created!");
-
-        return -1;
-    }
-
-    auto& database = database_opt.value();
-
-    UserRepo user_repo(database);
-    QualityRepo quality_repo(database);
-    ListingRepo listing_repo(quality_repo, database);
-    CollectionRepo collection_repo(database);
-
-    user_repo.add_user(User("Fin", "Meet at the front door. Available between 5pm - 7pm."));
-
+void add_listing_examples(ListingRepo& listing_repo) {
     Listing l1{
         1,
         "Trade",
@@ -99,6 +83,38 @@ int main() {
 
     listing_repo.add_assistant_listing(a1);
     listing_repo.add_assistant_listing(a2);
+}
+
+int main() {
+    auto database_opt = create_db();
+
+    if (!database_opt.has_value()) {
+        std::cout << "Database could not be created!" << std::endl;
+
+        return -1;
+    }
+
+    auto& database = database_opt.value();
+
+    UserRepo user_repo(database);
+    user_repo.add_user(User("Prototype User", "Meet at the front door. Available between 5pm - 7pm."));
+    user_repo.add_user(User("Fin", "Meet at the front door. Available between 5pm - 7pm."));
+    user_repo.add_user(User("Polina", "Meet at the front door. Available between 5pm - 7pm."));
+    user_repo.add_user(User("Brandon", "Meet at the front door. Available between 5pm - 7pm."));
+
+    QualityRepo quality_repo(database);
+    ListingRepo listing_repo(quality_repo, database);
+    CollectionRepo collection_repo(database);
+    ItemRepo item_repo(database);
+
+    add_listing_examples(listing_repo);
+
+    collection_repo.add_collection(1, Collection("Inventory", "Fridge", "My home fridge", ""));
+    collection_repo.add_collection(1, Collection("Meal", 
+        "Pasta Bolognese", 
+        "A classic Italian meat sauce served over pasta.", 
+        "Brown the mince in a pan, drain excess fat. Add diced onion and garlic and cook for 5 mins. Stir in tinned tomatoes and simmer for 20 mins. Cook pasta separately and combine."
+    ));
 
     httplib::Server server;
 

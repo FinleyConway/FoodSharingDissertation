@@ -19,7 +19,7 @@ public:
 
     explicit Item(SQLite::Statement& query) {
         name = query.getColumn("item_name").getString();
-        description = query.getColumn("description").getString();
+        description = query.getColumn("item_description").getString();
         image_path = query.getColumn("image_path").getString();
         quantity = query.getColumn("quantity").getInt();
     }

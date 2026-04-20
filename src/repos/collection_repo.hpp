@@ -48,6 +48,7 @@ public:
                 c.name AS collection_name,
                 c.description AS collection_description,
                 c.how_to_make,
+                i.id AS item_id,
                 i.name AS item_name,
                 i.description AS item_description,
                 i.image_path,
@@ -55,34 +56,37 @@ public:
             FROM collection AS c
             LEFT JOIN item AS i ON i.collection_id = c.id
             WHERE c.user_id = :user_id
+            ORDER BY c.id
         )");
 
         query.bind(":user_id", user_id);
         
         Collection collection;
-        Collection* collection_ptr = nullptr;
+        int64_t current_id = -1;
 
         while (query.executeStep()) {
             int64_t collection_id = query.getColumn("collection_id").getInt64();
 
             // bit wacky here...
             // checks if it has found a new collection
-            if (collection_ptr == nullptr || collection.id != collection_id) {
+            if (current_id != collection_id) {
                 // push the previous one as its done
-                if (collection_ptr != nullptr) {
+                if (current_id != -1) {
                     std::forward<Fn>(fn)(collection);
                 }
 
                 // create a new collection
                 collection = Collection(query);
-                collection_ptr = &collection;
+                current_id = collection_id;
             }
 
             // add item to current collection
-            collection.items.emplace_back(query);
+            if (!query.getColumn("item_id").isNull()) {
+                collection.items.emplace_back(query);
+            }
         }
 
-        if (collection_ptr != nullptr) {
+        if (current_id != -1) {
             std::forward<Fn>(fn)(collection);
         }
     }

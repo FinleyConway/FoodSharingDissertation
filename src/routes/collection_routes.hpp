@@ -47,6 +47,8 @@ public:
             res.set_content(json.dump(), "application/json");
         } 
         catch (const std::exception& e) {
+            std::cout << e.what() << std::endl;
+
             res.status = 400;
             res.set_content(R"({"error": "Invalid user_id"})", "application/json");
         }
