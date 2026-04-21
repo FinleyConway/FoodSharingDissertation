@@ -33,6 +33,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 # testing
 add_executable(${PROJECT_NAME}-tests
     tests/listing.test.cpp
+    tests/collection.test.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}-tests PRIVATE
